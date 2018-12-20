@@ -37,8 +37,12 @@ class EmployeeCreate extends Component {
                     />
                 </CardSection>
 
-                <CardSection>
-                    <Text>Shift</Text>
+                <CardSection style = {{ flexDirection: 'column' }}>
+                    <Text
+                        style = {styles.pickerTextStyle}
+                    >
+                        Shift
+                    </Text>
                     <Picker
                         style={{ flex: 1 }}
                         selectedValue = { this.props.shift }
@@ -50,15 +54,22 @@ class EmployeeCreate extends Component {
                     </Picker>
                 </CardSection>
                 
-                <CardSection>
+                {/* <CardSection>
                     <Button>
                         Create
                     </Button>
-                </CardSection>
+                </CardSection> */}
             </Card>
         );
     }
 }
+
+const styles = {
+    pickerTextStyle: {
+        fontSize: 18, 
+        paddingLeft: 20,
+    }
+};
 
 const mapStateToProps = (state) => {
     const { name, phone, shift } = state.employeeForm;
