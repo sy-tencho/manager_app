@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { employeeUpdate } from '../actions';
+import { employeeUpdate, employeeCreate } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class EmployeeCreate extends Component {
+    onButtonPress() {
+        const { name, phone, shift } = this.props;
+        
+        this.props.employeeCreate({ name, phone, shift: shift || 'Monday' });
+    }
+
     render() {
 
         const day = [
@@ -15,7 +21,7 @@ class EmployeeCreate extends Component {
             'Friday', 
             'Saturday', 
             'Sunday'
-        ]
+        ];
 
         return(
             <Card>
@@ -23,17 +29,18 @@ class EmployeeCreate extends Component {
                     <Input 
                         label='name'
                         placeholder='Shota'
-                        value={ this.props.name }
-                        onChangeText={ value => this.props.employeeUpdate({ prop: 'name', value })}
+                        value={ this.props.value }
+                        onChangeText={ text => this.props.employeeUpdate({ prop: 'name', text })}
+                        
                     />
                 </CardSection>
 
                 <CardSection>
                     <Input 
                         label='phone'
-                        placeholder='090-000-000'
-                        value={ this.props.phone }
-                        onChangeText={ value => this.props.mployeeUpdate({ prop: 'phone', value })}
+                        placeholder='090-000-000'  
+                        value={ this.props.value }                      
+                        onChangeText={ text => this.props.employeeUpdate({ prop: 'phone', text })}
                     />
                 </CardSection>
 
@@ -54,11 +61,13 @@ class EmployeeCreate extends Component {
                     </Picker>
                 </CardSection>
                 
-                {/* <CardSection>
-                    <Button>
+                <CardSection>
+                    <Button
+                        onPress={this.onButtonPress.bind(this)}
+                    >
                         Create
                     </Button>
-                </CardSection> */}
+                </CardSection>
             </Card>
         );
     }
@@ -77,4 +86,6 @@ const mapStateToProps = (state) => {
     return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate })(EmployeeCreate);
+export default connect(mapStateToProps, { 
+    employeeUpdate, employeeCreate 
+})(EmployeeCreate);
