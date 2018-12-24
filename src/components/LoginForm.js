@@ -37,7 +37,9 @@ class LoginForm extends Component {
         }
 
         return (
-            <Button onPress={this.onButtonPress.bind(this)}>
+            <Button 
+                onPress={this.onButtonPress.bind(this)}
+            >
                 Login
             </Button>
         );
@@ -64,9 +66,13 @@ class LoginForm extends Component {
                         value={this.props.password}
                     />
                 </CardSection>
-                    {this.renderButton()}
+                
+                <Text style={styles.errorTextStyle}>
+                    {this.props.error}
+                </Text>
+
                 <CardSection>
-                    {this.renderError()}
+                    {this.renderButton()}
                 </CardSection>
             </Card>
         );
