@@ -7,7 +7,7 @@ import { CardSection, Input } from './common';
 class EmployeeForm extends Component {
     render() {
 
-        const day = [
+        const days = [
             'Monday', 
             'Tuesday', 
             'Wednesday', 
@@ -23,8 +23,8 @@ class EmployeeForm extends Component {
                     <Input 
                         label='name'
                         placeholder='Shota'
-                        value={ this.props.value }
-                        onChangeText={ text => this.props.employeeUpdate({ prop: 'name', text })}
+                        value={ this.props.name }
+                        onChangeText={ value => this.props.employeeUpdate({ prop: 'name', value })}
                         
                     />
                 </CardSection>
@@ -33,8 +33,8 @@ class EmployeeForm extends Component {
                     <Input 
                         label='phone'
                         placeholder='090-000-000'  
-                        value={ this.props.value }                      
-                        onChangeText={ text => this.props.employeeUpdate({ prop: 'phone', text })}
+                        value={ this.props.phone }                      
+                        onChangeText={ value => this.props.employeeUpdate({ prop: 'phone', value })}
                     />
                 </CardSection>
 
@@ -45,11 +45,11 @@ class EmployeeForm extends Component {
                         Shift
                     </Text>
                     <Picker
-                        style={{ flex: 1 }}
+                        // style={{ flex: 1 }}
                         selectedValue = { this.props.shift }
-                        onValueChange = { day => this.props.employeeUpdate({ prop: 'shift', day})}
+                        onValueChange = { value => this.props.employeeUpdate({ prop: 'shift', value })}
                     >
-                        {day.map((day) => { 
+                        {days.map((day) => { 
                             return <Picker.Item label = { day } value={ day } /> 
                         })}
                     </Picker>

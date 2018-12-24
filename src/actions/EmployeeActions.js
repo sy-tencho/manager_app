@@ -18,11 +18,11 @@ export const employeeCreate = ({ name, phone, shift }) => {
     const { currentUser } = firebase.auth();
 
     return (dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/employees`) // ger current user
+        firebase.database().ref(`/users/${currentUser.uid}/employees`) // get current user
             .push({ name, phone, shift })
             .then(() => { 
                 dispatch({ type: EMPLOYEE_CREATE });
-                Actions.employeeList({ type: 'reset'});
+                Actions.employeeList({ type: 'reset' });
             });
     };
 };
